@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Text Encryptor</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3eeff 0%, #fafcff 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #222;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 370px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.70);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0, 60, 150, 0.08), 0 2px 8px rgba(0, 0, 0, 0.07);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container img {
+            width: 90px;
+            opacity: 0.85;
+            position: absolute;
+            top: -33px;
+            right: -25px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        h2 {
+            text-align: left;
+            font-size: 2em;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        
+        label {
+            font-size: 1em;
+            font-weight: 500;
+        }
+        
+        input[type=text],
+        input[type=number],
+        textarea {
+            width: 100%;
+            margin: 7px 0 18px 0;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #c3d2e5;
+            font-size: 1em;
+            background: rgba(240, 240, 255, 0.42);
+            outline: none;
+        }
+        
+        input[type=submit] {
+            width: 47%;
+            background: linear-gradient(90deg, #4e8cff 50%, #34c9ff 100%);
+            color: white;
+            padding: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.04em;
+            cursor: pointer;
+            margin-right: 3%;
+            box-shadow: 0 2px 6px rgba(0, 60, 200, 0.14);
+        }
+        
+        input[type=submit]:last-child {
+            margin-right: 0;
+        }
+        
+        .result {
+            background: rgba(255, 255, 255, 0.90);
+            padding: 18px 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 1.05em;
+            box-shadow: 0 2px 8px #d9eaff;
+        }
+        
+        @media (max-width: 550px) {
+            .container {
+                max-width: 98vw;
+                margin: 10vw auto;
+                padding: 17px;
+            }
+            .container img {
+                width: 68px;
+                top: -18px;
+                right: -10px;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <h2>Text Encryptor</h2>
+        <form method="post" autocomplete="off">
+            <label for="input_text">Message or Ciphertext:</label>
+            <textarea name="input_text" rows="3" placeholder="Enter text here..."></textarea>
+
+            <label for="keylength">Key length (for encryption):</label>
+            <input type="number" name="keylength" value="{{ keylength }}" min="1">
+
+            <label for="key">Key (for decryption or will be generated):</label>
+            <input type="text" name="key" value="{{ key }}">
+
+            <input type="submit" name="action" value="Encrypt">
+            <input type="submit" name="action" value="Decrypt">
+        </form>
+        {% if result %}
+        <div class="result">
+            <b>Result:</b> {{ result }}<br> {% if action == 'Encrypt' %}
+            <b>Key (save this for decryption):</b> {{ key }} {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
